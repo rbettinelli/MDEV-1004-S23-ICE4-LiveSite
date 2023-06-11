@@ -1,5 +1,15 @@
 #!/usr/bin/env node
 
+// -------------------------------------------------------------
+// - Robert Bettinelli - MDEV1004 - S2023 - Assignment#1
+// - 090003683@student.georgianc.on.ca
+// -------------------------------------------------------------
+// Server.ts - As Provided in Class Instruction
+// Personally entered and followed as pert of in class learning.
+// -------------------------------------------------------------
+// 06/10/2023 - RBettinelli - Header and Documentation Added
+// -------------------------------------------------------------
+
 /**
  * Module dependencies.
  */

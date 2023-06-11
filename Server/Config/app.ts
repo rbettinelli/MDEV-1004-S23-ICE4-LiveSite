@@ -1,5 +1,14 @@
+// -------------------------------------------------------------
+// - Robert Bettinelli - MDEV1004 - S2023 - Assignment#1
+// - 090003683@student.georgianc.on.ca
+// -------------------------------------------------------------
+// (Config) app.ts - As Provided in Class Instruction
+// Personally entered and followed as pert of in class learning.
+// -------------------------------------------------------------
+// 06/10/2023 - RBettinelli - Header and Documentation Added
+// -------------------------------------------------------------
+
 import express from 'express';
-import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import indexRouter from '../Routes/index';
