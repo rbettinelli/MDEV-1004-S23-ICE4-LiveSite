@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-
 import Movie from '../Models/movie';
 
+// Takes Array and removes spaces @ Front and End
 function SanitizeArray(unsanitizedArray: string[]): string[]
 {
     let sanitizedArray: string[] = Array<string>();
@@ -12,6 +12,7 @@ function SanitizeArray(unsanitizedArray: string[]): string[]
     return sanitizedArray;
 }
 
+// Pull All Mongo Movies Database Documents and Outputs.
 export function DisplayMovieList(req: Request, res: Response, next: NextFunction): void
 {
     
@@ -26,6 +27,7 @@ export function DisplayMovieList(req: Request, res: Response, next: NextFunction
     });
 }
 
+// Find Movie by ID in MongoDB and Outputs.
 export function DisplayMovieByID(req: Request, res: Response, next: NextFunction): void
 {
     let id = req.params.id;
@@ -40,14 +42,17 @@ export function DisplayMovieByID(req: Request, res: Response, next: NextFunction
     });
 }
 
+// Add Movie to MongoDB and Returns Move output.
 export function AddMovie(req: Request, res: Response, next: NextFunction): void
 {
-
+    // This section will take in-line Entry and Splits then Sanitizes
+    // For unlimited Array of items.
     let genres = SanitizeArray((req.body.genres as string).split(","));
     let directors = SanitizeArray((req.body.directors as string).split(","));
     let writers = SanitizeArray((req.body.writers as string).split(","));
     let actors = SanitizeArray((req.body.actors as string).split(","));
 
+    // Populates movie with data from API. 
     let movie = new Movie({
        movieID: req.body.movieID,
        title: req.body.title,
@@ -64,6 +69,7 @@ export function AddMovie(req: Request, res: Response, next: NextFunction): void
        posterLink: req.body.posterLink
     });
 
+    // Post Data.
     Movie.create(movie)
     .then(function()
     {
@@ -75,6 +81,7 @@ export function AddMovie(req: Request, res: Response, next: NextFunction): void
     });
 }
 
+// See ADD functionality Above with the addition it only updated by _id
 export function UpdateMovie(req: Request, res: Response, next: NextFunction): void
 {
     let id = req.params.id;
@@ -111,6 +118,7 @@ export function UpdateMovie(req: Request, res: Response, next: NextFunction): vo
     });
 }
 
+// Delete movie based on _id
 export function DeleteMovie(req: Request, res: Response, next: NextFunction): void
 {
     let id = req.params.id;

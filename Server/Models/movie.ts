@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 
+// Movie interface for Collecting data in specific types. 
 interface IMovie {
     movieID: number,
     title: string,
@@ -16,6 +17,7 @@ interface IMovie {
     posterLink: string
 }
 
+// Mongo DB schema Setup
 let movieSchema = new Schema<IMovie>({
     movieID: Number,
     title: String,
@@ -32,6 +34,7 @@ let movieSchema = new Schema<IMovie>({
     posterLink: String
 });
 
+// Build Model Object as Interface utilizing Schema. 
 let Movie = model<IMovie>('movies', movieSchema);
 
 export default Movie;
