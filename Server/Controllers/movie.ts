@@ -27,6 +27,22 @@ export function DisplayMovieList(req: Request, res: Response, next: NextFunction
 {
     
     Movie.find({})
+    .sort({ movieID: 1 })
+    .then(function(data)
+    {
+        res.status(200).json(data);
+    })
+    .catch(function(err)
+    {
+        console.error(err);
+    });
+}
+
+// Pull All Mongo Movie Titles Database Documents and Outputs.
+export function DisplayMovieListTitle(req: Request, res: Response, next: NextFunction): void
+{
+    Movie.find({}, { movieID: 1, title: 1 })
+    .sort({ movieID: 1 })
     .then(function(data)
     {
         res.status(200).json(data);

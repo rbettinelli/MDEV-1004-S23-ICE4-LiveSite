@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteMovie = exports.UpdateMovie = exports.AddMovie = exports.DisplayMovieByID = exports.DisplayMovieList = void 0;
+exports.DeleteMovie = exports.UpdateMovie = exports.AddMovie = exports.DisplayMovieByID = exports.DisplayMovieListTitle = exports.DisplayMovieList = void 0;
 const movie_1 = __importDefault(require("../Models/movie"));
 function SanitizeArray(unsanitizedArray) {
     let sanitizedArray = Array();
@@ -14,6 +14,7 @@ function SanitizeArray(unsanitizedArray) {
 }
 function DisplayMovieList(req, res, next) {
     movie_1.default.find({})
+        .sort({ movieID: 1 })
         .then(function (data) {
         res.status(200).json(data);
     })
@@ -22,6 +23,17 @@ function DisplayMovieList(req, res, next) {
     });
 }
 exports.DisplayMovieList = DisplayMovieList;
+function DisplayMovieListTitle(req, res, next) {
+    movie_1.default.find({}, { movieID: 1, title: 1 })
+        .sort({ movieID: 1 })
+        .then(function (data) {
+        res.status(200).json(data);
+    })
+        .catch(function (err) {
+        console.error(err);
+    });
+}
+exports.DisplayMovieListTitle = DisplayMovieListTitle;
 function DisplayMovieByID(req, res, next) {
     let id = req.params.id;
     movie_1.default.findById({ _id: id })

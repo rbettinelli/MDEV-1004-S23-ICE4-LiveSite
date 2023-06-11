@@ -11,11 +11,16 @@
 import express, { response } from 'express';
 let router = express.Router();
 
-import {DisplayMovieList, DisplayMovieByID, AddMovie, UpdateMovie, DeleteMovie } from '../Controllers/movie';
+import {DisplayMovieList, DisplayMovieByID, AddMovie, UpdateMovie, DeleteMovie, DisplayMovieListTitle } from '../Controllers/movie';
 
 // Movie List Route
 router.get('/list', function(req, res, next) {
   DisplayMovieList(req, res, next);
+});
+
+// Movie List movieID & Titles Route
+router.get('/listTitle', function(req, res, next) {
+  DisplayMovieListTitle(req, res, next);
 });
 
 // Find By ID Route

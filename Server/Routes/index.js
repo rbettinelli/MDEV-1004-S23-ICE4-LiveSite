@@ -9,6 +9,9 @@ const movie_1 = require("../Controllers/movie");
 router.get('/list', function (req, res, next) {
     (0, movie_1.DisplayMovieList)(req, res, next);
 });
+router.get('/listTitle', function (req, res, next) {
+    (0, movie_1.DisplayMovieListTitle)(req, res, next);
+});
 router.get('/find/:id', function (req, res, next) {
     (0, movie_1.DisplayMovieByID)(req, res, next);
 });
