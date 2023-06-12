@@ -15,6 +15,11 @@ import indexRouter from '../Routes/index';
 import mongoose from 'mongoose';
 import db from './db';
 
+//Modules for Auth.
+import session from 'express-session';
+import passport from 'passport';
+import passportLocal from 'passport-local’;
+
 // Mongoose Connection Functionality
 // db.remoteURI - MongoDB Atlas 
 // db.localURI  - MongoDB LocalHost  
