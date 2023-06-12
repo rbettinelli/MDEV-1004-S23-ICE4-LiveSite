@@ -18,7 +18,12 @@ import db from './db';
 //Modules for Auth.
 import session from 'express-session';
 import passport from 'passport';
-import passportLocal from 'passport-local’;
+import passportLocal from 'passport-local';
+
+// authentication objects
+let strategy = passportLocal.Strategy; // alias
+import User from '../Models/user';
+
 
 // Mongoose Connection Functionality
 // db.remoteURI - MongoDB Atlas 
@@ -33,10 +38,30 @@ mongoose.connection.on('disconnected', function() {
 
 // App configuration setup Base Access Point.
 let app = express();
+
+// Middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// setup express session
+app.use(session({
+    secret: db.secret,
+    saveUninitialized: false,
+    resave: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// implement an Auth Strategy
+passport.use(User.createStrategy());
+// serialize and deserialize user data
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+passport.use(strategy);
+
 app.use('/api/', indexRouter);
 
 export default app;
