@@ -6,7 +6,7 @@
 // Personally entered and followed as pert of in class learning.
 // -------------------------------------------------------------
 // 06/10/2023 - RBettinelli - Header and Documentation Added
-// 06/12/2023 - RBettinelli - Added Authentication Learned. 
+// 06/12/2023 - RBettinelli - Added Authentication Learned
 // -------------------------------------------------------------
 
 import express from 'express';
