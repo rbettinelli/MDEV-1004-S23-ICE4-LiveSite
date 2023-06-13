@@ -11,8 +11,8 @@
 import express, { response } from 'express';
 let router = express.Router();
 
-import {DisplayMovieList, DisplayMovieByID, AddMovie, UpdateMovie, DeleteMovie, DisplayMovieListTitle, ProcessRegistration ,ProcessLogin, ProcessLogout } from '../Controllers/movie';
-
+import {DisplayMovieList, DisplayMovieByID, AddMovie, UpdateMovie, DeleteMovie, DisplayMovieListTitle } from '../Controllers/movie';
+import {ProcessRegistration ,ProcessLogin, ProcessLogout} from '../Controllers/login';
 
 
 // Movie List Route
