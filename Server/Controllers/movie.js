@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProcessLogout = exports.ProcessLogin = exports.ProcessRegisterPage = exports.DeleteMovie = exports.UpdateMovie = exports.AddMovie = exports.DisplayMovieByID = exports.DisplayMovieListTitle = exports.DisplayMovieList = void 0;
+exports.ProcessLogout = exports.ProcessLogin = exports.ProcessRegistration = exports.DeleteMovie = exports.UpdateMovie = exports.AddMovie = exports.DisplayMovieByID = exports.DisplayMovieListTitle = exports.DisplayMovieList = void 0;
 const user_1 = __importDefault(require("../Models/user"));
 const movie_1 = __importDefault(require("../Models/movie"));
 const passport_1 = __importDefault(require("passport"));
@@ -118,7 +118,7 @@ function DeleteMovie(req, res, next) {
     });
 }
 exports.DeleteMovie = DeleteMovie;
-function ProcessRegisterPage(req, res, next) {
+function ProcessRegistration(req, res, next) {
     let newUser = new user_1.default({
         username: req.body.username,
         emailAddress: req.body.EmailAddress,
@@ -137,7 +137,7 @@ function ProcessRegisterPage(req, res, next) {
         });
     });
 }
-exports.ProcessRegisterPage = ProcessRegisterPage;
+exports.ProcessRegistration = ProcessRegistration;
 function ProcessLogin(req, res, next) {
     passport_1.default.authenticate('local', (err, user, info) => {
         if (err) {

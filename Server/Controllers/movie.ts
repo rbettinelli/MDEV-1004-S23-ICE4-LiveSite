@@ -168,7 +168,7 @@ export function DeleteMovie(req: Request, res: Response, next: NextFunction): vo
 
 // AUTHENTICATION
 
-    export function ProcessRegisterPage(req:Request, res:Response, next:NextFunction): void
+    export function ProcessRegistration(req:Request, res:Response, next:NextFunction): void
     {
         // instantiate a new user object
         let newUser = new User
@@ -190,7 +190,7 @@ export function DeleteMovie(req: Request, res: Response, next: NextFunction): vo
                 return res.json({success: false, msg: "User not Registered Successfully!"});
             }
             // if we had a front-end (Angular, React or a Mobile UI)...
-            //return res.json({success: true, msg: 'User Registered Successfully!'});
+            // return res.json({success: true, msg: 'User Registered Successfully!'});
             // automatically login the user
             return passport.authenticate('local')(req, res, ()=>
             {
@@ -213,20 +213,18 @@ export function DeleteMovie(req: Request, res: Response, next: NextFunction): vo
         {
             return res.json({success: false, msg: 'User Not Logged in Successfully!'});
         }
-        req.login(user, (err) => {
-        // are there DB errors?
-        if(err)
+        req.login(user, (err) => 
         {
-            console.error(err);
-            return next(err);
-        }
-    
-        // if we had a front-end (like Angular or React or Mobile UI)...
-        return res.json({success: true, msg: 'User Logged in Successfully!', user: user});
-        
+            // are there DB errors?
+            if(err)
+            {
+                console.error(err);
+                return next(err);
+            }
+            // if we had a front-end (like Angular or React or Mobile UI)...
+            return res.json({success: true, msg: 'User Logged in Successfully!', user: user});
         });
     })(req, res, next);
-
 }
 
 export function ProcessLogout(req:Request, res:Response, next:NextFunction): void

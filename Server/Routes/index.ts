@@ -11,7 +11,9 @@
 import express, { response } from 'express';
 let router = express.Router();
 
-import {DisplayMovieList, DisplayMovieByID, AddMovie, UpdateMovie, DeleteMovie, DisplayMovieListTitle } from '../Controllers/movie';
+import {DisplayMovieList, DisplayMovieByID, AddMovie, UpdateMovie, DeleteMovie, DisplayMovieListTitle, ProcessRegistration ,ProcessLogin, ProcessLogout } from '../Controllers/movie';
+
+
 
 // Movie List Route
 router.get('/list', function(req, res, next) {
@@ -42,5 +44,23 @@ router.delete('/delete/:id', function(req, res, next) {
 router.put('/update/:id', function(req, res, next) {
   UpdateMovie(req, res, next);
 });
+
+// AUTHENTICATE
+
+router.post('/register', function(req, res, next)
+{
+  ProcessRegistration(req, res, next);
+});
+
+router.post('/logon', function(req, res, next)
+{
+  ProcessLogin(req, res, next);
+});
+
+router.get('/logout', function(req, res, next)
+{
+  ProcessLogout(req, res, next);
+});
+
 
 export default router;

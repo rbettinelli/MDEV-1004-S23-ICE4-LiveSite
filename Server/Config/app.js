@@ -36,7 +36,6 @@ app.use(passport_1.default.session());
 passport_1.default.use(user_1.default.createStrategy());
 passport_1.default.serializeUser(user_1.default.serializeUser());
 passport_1.default.deserializeUser(user_1.default.deserializeUser());
-passport_1.default.use(strategy);
 app.use('/api/', index_1.default);
 exports.default = app;
 //# sourceMappingURL=app.js.map

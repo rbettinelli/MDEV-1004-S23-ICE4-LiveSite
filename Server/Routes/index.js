@@ -24,5 +24,14 @@ router.delete('/delete/:id', function (req, res, next) {
 router.put('/update/:id', function (req, res, next) {
     (0, movie_1.UpdateMovie)(req, res, next);
 });
+router.post('/register', function (req, res, next) {
+    (0, movie_1.ProcessRegistration)(req, res, next);
+});
+router.post('/logon', function (req, res, next) {
+    (0, movie_1.ProcessLogin)(req, res, next);
+});
+router.get('/logout', function (req, res, next) {
+    (0, movie_1.ProcessLogout)(req, res, next);
+});
 exports.default = router;
 //# sourceMappingURL=index.js.map

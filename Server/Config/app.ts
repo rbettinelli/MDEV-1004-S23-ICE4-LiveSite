@@ -15,7 +15,7 @@ import indexRouter from '../Routes/index';
 import mongoose from 'mongoose';
 import db from './db';
 
-//Modules for Auth.
+// Modules for Auth.
 import session from 'express-session';
 import passport from 'passport';
 import passportLocal from 'passport-local';
@@ -23,7 +23,6 @@ import passportLocal from 'passport-local';
 // authentication objects
 let strategy = passportLocal.Strategy; // alias
 import User from '../Models/user';
-
 
 // Mongoose Connection Functionality
 // db.remoteURI - MongoDB Atlas 
@@ -57,10 +56,12 @@ app.use(passport.session());
 
 // implement an Auth Strategy
 passport.use(User.createStrategy());
+
 // serialize and deserialize user data
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-passport.use(strategy);
+
+// passport.use(strategy);
 
 app.use('/api/', indexRouter);
 
