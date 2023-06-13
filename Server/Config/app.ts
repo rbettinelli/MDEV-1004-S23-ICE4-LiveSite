@@ -6,6 +6,7 @@
 // Personally entered and followed as pert of in class learning.
 // -------------------------------------------------------------
 // 06/10/2023 - RBettinelli - Header and Documentation Added
+// 06/12/2023 - RBettinelli - Added Authentication Learned. 
 // -------------------------------------------------------------
 
 import express from 'express';
@@ -58,10 +59,11 @@ app.use(passport.session());
 passport.use(User.createStrategy());
 
 // serialize and deserialize user data
+// Please note Adjustment to serialUser Type Definition to User:any !
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// passport.use(strategy);
+// passport.use(strategy); <- Not Required. 
 
 app.use('/api/', indexRouter);
 

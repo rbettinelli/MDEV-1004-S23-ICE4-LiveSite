@@ -6,6 +6,7 @@
 // Personally entered and followed as pert of in class learning.
 // -------------------------------------------------------------
 // 06/10/2023 - RBettinelli - Header and Documentation Added
+// 06/12/2023 - RBettinelli - Added Login. 
 // -------------------------------------------------------------
 
 import express, { response } from 'express';
@@ -52,7 +53,7 @@ router.post('/register', function(req, res, next)
   ProcessRegistration(req, res, next);
 });
 
-router.post('/logon', function(req, res, next)
+router.post('/login', function(req, res, next)
 {
   ProcessLogin(req, res, next);
 });

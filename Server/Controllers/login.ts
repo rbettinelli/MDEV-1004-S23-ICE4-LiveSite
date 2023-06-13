@@ -1,3 +1,13 @@
+// -------------------------------------------------------------
+// - Robert Bettinelli - MDEV1004 - S2023 - ICE5
+// - 090003683@student.georgianc.on.ca
+// -------------------------------------------------------------
+// (Controllers) login.ts - As Provided in Class Instruction
+// Personally entered and followed as pert of in class learning.
+// -------------------------------------------------------------
+// 06/12/2023 - RBettinelli - Authentication Creation.
+// -------------------------------------------------------------
+
 // AUTHENTICATION
 import { Request, Response, NextFunction } from 'express';
 import User from '../Models/user';
