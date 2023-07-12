@@ -17,5 +17,6 @@
         "experimentalDecorators": true,
         "moduleResolution": "Node",
         "esModuleInterop": true
-    }
+    },
+    "exclude": ["videos"]
 }

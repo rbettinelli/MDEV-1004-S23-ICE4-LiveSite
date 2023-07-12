@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 import passportLocalMongoose from 'passport-local-mongoose';
+import { GenerateToken } from '../Util/index';
+
 
 interface IUser {
     username: String,
@@ -12,9 +14,9 @@ interface IUser {
 
 const UserSchema = new Schema<IUser>
 ({
- username: String,
- emailAddress: String,
- displayName: String,
+ username: {type: String, required: true},
+ emailAddress: {type: String, required: true},
+ displayName: {type: String, required: true},
  created:
  {
  type: Date,

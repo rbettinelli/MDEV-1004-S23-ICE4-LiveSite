@@ -28,21 +28,60 @@ interface IMovie {
 }
 
 // Mongo DB schema Setup
-let movieSchema = new Schema<IMovie>({
-    movieID: Number,
-    title: String,
-    studio: String,
-    genres: [String],
-    directors: [String],
-    writers: [String],
-    actors: [String],
-    year: Number,
-    length: String,
-    shortDescription: String,
-    mpaRating: String,
-    criticsRating: Number,
-    posterLink: String
-});
+const movieSchema = new Schema<IMovie>({
+    movieID: {
+      type: Number,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    studio: {
+      type: String,
+      required: true,
+    },
+    genres: {
+      type: [String],
+      required: true,
+    },
+    directors: {
+      type: [String],
+      required: true,
+    },
+    writers: {
+      type: [String],
+      required: true,
+    },
+    actors: {
+      type: [String],
+      required: true,
+    },
+    year: {
+      type: Number,
+      required: true, 
+    },
+    length: {
+      type: String,
+      required: true, 
+    },
+    shortDescription: {
+      type: String,
+      required: true, 
+    },
+    mpaRating: {
+      type: String,
+      required: true, 
+    },
+    criticsRating: {
+      type: Number,
+      required: true, 
+    },
+    posterLink: {
+      type: String,
+      required: true, 
+    },
+  });
 
 // Build Model Object as Interface utilizing Schema. 
 let Movie = model<IMovie>('movies', movieSchema);

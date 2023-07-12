@@ -12,6 +12,8 @@
 import { Request, Response, NextFunction } from 'express';
 import User from '../Models/user';
 import passport from 'passport';
+import mongoose from 'mongoose';
+import { GenerateToken } from '../Util/index';
 
 export function ProcessRegistration(req:Request, res:Response, next:NextFunction): void
 {
@@ -25,21 +27,16 @@ export function ProcessRegistration(req:Request, res:Response, next:NextFunction
 
     User.register(newUser, req.body.password, (err) =>
     {
-        if(err)
+        if(err instanceof mongoose.Error.ValidationError)
         {
-            console.error('Error: Inserting New User');
-            if(err.name == "UserExistsError")
-            {
-                console.error('Error: User Already Exists');
-            }
-            return res.json({success: false, msg: "User not Registered Successfully!"});
+            console.error("ERROR: All Fields Required.");
+            return res.json({success: false, msg: "ERROR: User Registration error. All Fields Req'd."});
         }
-        // if we had a front-end (Angular, React or a Mobile UI)...
-        // return res.json({success: true, msg: 'User Registered Successfully!'});
+
         // automatically login the user
         return passport.authenticate('local')(req, res, ()=>
         {
-           return res.json({success: true, msg: 'User Logged in Successfully!', user: newUser});
+           // return res.json({success: true, msg: 'User Logged in Successfully!', user: newUser});
         });
     });
 }
@@ -56,19 +53,29 @@ export function ProcessLogin(req:Request, res:Response, next:NextFunction): void
     // are the login errors?
     if(!user)
     {
-        return res.json({success: false, msg: 'User Not Logged in Successfully!'});
+        return res.json({success: false, msg: 'ERROR: User Not Logged in.'});
     }
-    req.login(user, (err) => 
+
+    req.logIn(user, (err) =>
     {
-        // are there DB errors?
+        // are there db errors?
         if(err)
         {
             console.error(err);
-            return next(err);
+            res.end(err);
         }
-        // if we had a front-end (like Angular or React or Mobile UI)...
-        return res.json({success: true, msg: 'User Logged in Successfully!', user: user});
+
+        const authToken = GenerateToken(user);
+
+        return res.json({success: true, msg: 'User Logged In Successfully!', user: {
+            id: user._id,
+            displayName: user.displayName,
+            username: user.username,
+            emailAddress: user.emailAddress
+        }, token: authToken});
     });
+    return;
+
 })(req, res, next);
 }
 
