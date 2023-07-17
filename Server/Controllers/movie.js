@@ -6,16 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteMovie = exports.UpdateMovie = exports.AddMovie = exports.DisplayMovieByID = exports.DisplayMovieListTitle = exports.DisplayMovieList = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const movie_1 = __importDefault(require("../Models/movie"));
-function SanitizeArray(unsanitizedString) {
-    if (unsanitizedString == null || unsanitizedString == undefined) {
-        return Array();
+function SanitizeArray(unsanitizedValue) {
+    if (Array.isArray(unsanitizedValue)) {
+        return unsanitizedValue.map((value) => value.trim());
     }
-    let unsanitizedArray = unsanitizedString.split(",");
-    let sanitizedArray = Array();
-    for (const unsanitizedString of unsanitizedArray) {
-        sanitizedArray.push(unsanitizedString.trim());
+    else if (typeof unsanitizedValue === "string") {
+        return unsanitizedValue.split(",").map((value) => value.trim());
     }
-    return sanitizedArray;
+    else {
+        return [];
+    }
 }
 function DisplayMovieList(req, res, next) {
     movie_1.default.find({})

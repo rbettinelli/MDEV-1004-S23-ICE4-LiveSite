@@ -35,17 +35,17 @@ router.get('/find/:id', function(req, res, next) {
 });
 
 // Add Document Route
-router.post('/add', passport.authenticate('jwt', {session: false}),function(req, res, next) {
+router.post('/add', /* passport.authenticate('jwt', {session: false}),*/function(req, res, next) {
   AddMovie(req, res, next);
 });
 
 // Delete By ID Route
-router.delete('/delete/:id', passport.authenticate('jwt', {session: false}),function(req, res, next) {
+router.delete('/delete/:id', /* passport.authenticate('jwt', {session: false}), {session: false}),*/function(req, res, next) {
   DeleteMovie(req, res, next);
 });
 
 // Update Document By ID Route
-router.put('/update/:id',passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.put('/update/:id',/* passport.authenticate('jwt', {session: false}),*/ function(req, res, next) {
   UpdateMovie(req, res, next);
 });
 

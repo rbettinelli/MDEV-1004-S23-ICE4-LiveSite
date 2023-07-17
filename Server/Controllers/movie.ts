@@ -14,19 +14,17 @@ import Movie from '../Models/movie';
 
 // UTILITY
 // Takes Array and removes spaces @ Front and End
-function SanitizeArray(unsanitizedString: string): string[]
+function SanitizeArray(unsanitizedValue: string | string[]): string[]
 {
-    if (unsanitizedString == null || unsanitizedString == undefined)
+    if (Array.isArray(unsanitizedValue))
     {
-        return Array<string>();
-    }
-    let unsanitizedArray: Array<string> = unsanitizedString.split(",");
-    let sanitizedArray: string[] = Array<string>();
-    for (const unsanitizedString of unsanitizedArray) 
+        return unsanitizedValue.map((value) => value.trim());
+    } else if (typeof unsanitizedValue === "string")
     {
-        sanitizedArray.push(unsanitizedString.trim());
+        return unsanitizedValue.split(",").map((value) => value.trim());
+    } else {
+    return [];
     }
-    return sanitizedArray;
 }
 
 // API FUNCTIONS
