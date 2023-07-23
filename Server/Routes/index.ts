@@ -7,11 +7,13 @@
 // -------------------------------------------------------------
 // 06/10/2023 - RBettinelli - Header and Documentation Added
 // 06/12/2023 - RBettinelli - Added Login. 
+// 07/22/2023 - RBettinelli - Added Secure Flag. 
 // -------------------------------------------------------------
 
 import express, { response } from 'express';
 let router = express.Router();
 import passport from 'passport';
+import db from '../Config/db';
 
 import {DisplayMovieList, DisplayMovieByID, AddMovie, UpdateMovie, DeleteMovie, DisplayMovieListTitle } from '../Controllers/movie';
 import {ProcessRegistration ,ProcessLogin, ProcessLogout} from '../Controllers/login';
@@ -34,23 +36,44 @@ router.get('/find/:id', function(req, res, next) {
   DisplayMovieByID(req, res, next);
 });
 
-// Add Document Route
-router.post('/add', /* passport.authenticate('jwt', {session: false}),*/function(req, res, next) {
-  AddMovie(req, res, next);
-});
+// Secure Flag to use Secure or non-secure Routes.
+if (db.secure) {
+  // Secure Flag Routes
 
-// Delete By ID Route
-router.delete('/delete/:id', /* passport.authenticate('jwt', {session: false}), {session: false}),*/function(req, res, next) {
-  DeleteMovie(req, res, next);
-});
+  // Add
+  router.post('/add',  passport.authenticate('jwt', {session: false}),function(req, res, next) {
+    AddMovie(req, res, next);
+  });
 
-// Update Document By ID Route
-router.put('/update/:id',/* passport.authenticate('jwt', {session: false}),*/ function(req, res, next) {
-  UpdateMovie(req, res, next);
-});
+  // Update
+  router.put('/update/:id', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    UpdateMovie(req, res, next);
+  });
+
+  // Delete
+  router.delete('/delete/:id', passport.authenticate('jwt', {session: false}),function(req, res, next) {
+    DeleteMovie(req, res, next);
+  });
+
+}else {
+  // Non-Secure Flag Set Routes
+  
+  // Add
+  router.post('/add', function(req, res, next) {
+    AddMovie(req, res, next);
+  });
+  // Update
+  router.put('/update/:id', function(req, res, next) {
+    UpdateMovie(req, res, next);
+  });
+
+  // Delete
+  router.delete('/delete/:id', function(req, res, next) {
+    DeleteMovie(req, res, next);
+  });
+}
 
 // AUTHENTICATE
-
 router.post('/register', function(req, res, next)
 {
   ProcessRegistration(req, res, next);
