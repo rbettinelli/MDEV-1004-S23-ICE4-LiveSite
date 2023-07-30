@@ -17,6 +17,13 @@ import {DisplayMovieList, DisplayMovieByID, AddMovie, UpdateMovie, DeleteMovie, 
 import {ProcessRegistration ,ProcessLogin, ProcessLogout} from '../Controllers/login';
 
 
+//Check Online
+router.get('/Version', function(req, res, next)
+{
+  console.log("Version Online");
+  res.json({success: true, msg: "Version: Online"});
+});
+
 // Movie List Route
 router.get('/list', passport.authenticate('jwt', {session: false}), (req, res, next) => DisplayMovieList(req, res, next));
 
