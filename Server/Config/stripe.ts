@@ -2,20 +2,16 @@
 // - Robert Bettinelli - MDEV1004 - S2023
 // - 090003683@student.georgianc.on.ca
 // -------------------------------------------------------------
-// (Config) db.ts - As Provided in Class Instruction
+// (Config) stripe.ts - As Provided in Class Instruction
 // Personally entered and followed as pert of in class learning.
 // -------------------------------------------------------------
-// 06/10/2023 - RBettinelli - Header and Documentation Added
+// 08/12/2023 - RBettinelli - Base.
 // -------------------------------------------------------------
 
-// Connection Setup for MongoDB Locations.
-let localURI = "mongodb://localhost:27017/movies";
-let remoteURI =
-  "mongodb+srv://robertbettinelli:k9P5Zy44TKJZsGls@cluster0.z16ahlj.mongodb.net/movies";
-let secret = "#mySecret2023!";
+import "dotenv/config";
 
+// Keys for Stripe (Keep Private!!!)
 export default {
-  localURI: localURI,
-  remoteURI: remoteURI,
-  secret: secret,
+  secretKey: process.env.STRIPE_SECRET_KEY as string,
+  publishableKey: process.env.STRIPE_PUBLISHABLE_KEY as string,
 };

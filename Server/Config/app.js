@@ -9,6 +9,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const index_1 = __importDefault(require("../Routes/index"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const db_1 = __importDefault(require("./db"));
+require("dotenv/config");
 const express_session_1 = __importDefault(require("express-session"));
 const passport_1 = __importDefault(require("passport"));
 const passport_local_1 = __importDefault(require("passport-local"));
@@ -19,14 +20,14 @@ let ExtractJWT = passport_jwt_1.default.ExtractJwt;
 let localStrategy = passport_local_1.default.Strategy;
 const user_1 = __importDefault(require("../Models/user"));
 mongoose_1.default.connect(db_1.default.remoteURI);
-mongoose_1.default.connection.on('connected', function () {
+mongoose_1.default.connection.on("connected", function () {
     console.log(`connected to mongo.`);
 });
-mongoose_1.default.connection.on('disconnected', function () {
+mongoose_1.default.connection.on("disconnected", function () {
     console.log(`mongo disconnected.`);
 });
 let app = (0, express_1.default)();
-app.use((0, morgan_1.default)('dev'));
+app.use((0, morgan_1.default)("dev"));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cookie_parser_1.default)());
@@ -34,7 +35,7 @@ app.use((0, cors_1.default)());
 app.use((0, express_session_1.default)({
     secret: db_1.default.secret,
     saveUninitialized: false,
-    resave: false
+    resave: false,
 }));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
@@ -43,7 +44,7 @@ passport_1.default.serializeUser(user_1.default.serializeUser());
 passport_1.default.deserializeUser(user_1.default.deserializeUser());
 let jwtOptions = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: db_1.default.secret
+    secretOrKey: db_1.default.secret,
 };
 let strategy = new JWTStrategy(jwtOptions, function (jwt_payload, done) {
     try {
@@ -58,6 +59,6 @@ let strategy = new JWTStrategy(jwtOptions, function (jwt_payload, done) {
     }
 });
 passport_1.default.use(strategy);
-app.use('/api/', index_1.default);
+app.use("/api/", index_1.default);
 exports.default = app;
 //# sourceMappingURL=app.js.map
